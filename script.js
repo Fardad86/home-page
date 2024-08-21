@@ -14,12 +14,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function moveShape(shape) {
-        shape.addEventListener('mouseover', () => {
-            const newX = Math.random() * window.innerWidth;
-            const newY = Math.random() * window.innerHeight;
-            shape.style.transition = 'left 0.5s, top 0.5s';
-            shape.style.left = `${newX}px`;
-            shape.style.top = `${newY}px`;
+        // حرکت آرام به سمت موس
+        document.addEventListener('mousemove', (event) => {
+            const shapeRect = shape.getBoundingClientRect();
+            const shapeX = shapeRect.left + shapeRect.width / 2;
+            const shapeY = shapeRect.top + shapeRect.height / 2;
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
+            
+            const dx = mouseX - shapeX;
+            const dy = mouseY - shapeY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            const moveX = dx / distance * 2; // Adjust speed here
+            const moveY = dy / distance * 2; // Adjust speed here
+
+            shape.style.left = `${parseFloat(shape.style.left) + moveX}px`;
+            shape.style.top = `${parseFloat(shape.style.top) + moveY}px`;
         });
     }
 
