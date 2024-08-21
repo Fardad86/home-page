@@ -1,4 +1,3 @@
-// Optional JavaScript can go here
 document.addEventListener('DOMContentLoaded', () => {
     const shapesContainer = document.querySelector('.shapes-container');
     const numberOfShapes = 20; // تعداد اشکال
