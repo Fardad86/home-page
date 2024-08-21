@@ -14,24 +14,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function moveShape(shape) {
-        // حرکت آرام به سمت موس
-        document.addEventListener('mousemove', (event) => {
-            const shapeRect = shape.getBoundingClientRect();
-            const shapeX = shapeRect.left + shapeRect.width / 2;
-            const shapeY = shapeRect.top + shapeRect.height / 2;
-            const mouseX = event.clientX;
-            const mouseY = event.clientY;
-            
-            const dx = mouseX - shapeX;
-            const dy = mouseY - shapeY;
-            const distance = Math.sqrt(dx * dx + dy * dy);
+        // حرکت تصادفی به صورت مداوم
+        function randomMovement() {
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            shape.style.transition = 'left 5s ease-in-out, top 5s ease-in-out';
+            shape.style.left = `${x}px`;
+            shape.style.top = `${y}px`;
+        }
 
-            const moveX = dx / distance * 2; // Adjust speed here
-            const moveY = dy / distance * 2; // Adjust speed here
-
-            shape.style.left = `${parseFloat(shape.style.left) + moveX}px`;
-            shape.style.top = `${parseFloat(shape.style.top) + moveY}px`;
-        });
+        // حرکت هر 5 ثانیه به موقعیت تصادفی
+        setInterval(randomMovement, 5000);
     }
 
     for (let i = 0; i < numberOfShapes; i++) {
